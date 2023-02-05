@@ -10,43 +10,21 @@ class Solution{
         void merge(long long arr1[], long long arr2[], int n, int m) 
         { 
             // code here
-            int arr[n+m];
-            int i=0,j=0,k=0;
-            while(i<n&&j<m){
-                if(arr1[i]<=arr2[j]){
-                    arr[k]=arr1[i];
-                    i++;
-                    k++;
+            int i=n-1;
+            int j=0;
+            while(i>=0&&j<m){
+                if(arr1[i]<arr2[j]){
+                    break;
                 }
                 else{
-                    arr[k]=arr2[j];
+                    swap(arr1[i],arr2[j]);
+                    i--;
                     j++;
-                    k++;
                 }
             }
-            while(i<n){
-                arr[k]=arr1[i];
-                i++;
-                k++;
-            }
-            while(j<m){
-                arr[k]=arr2[j];
-                j++;
-                k++;
-            }
-            int ind=0,temp=0;
-            while(ind<n){
-                arr1[temp]=arr[ind];
-                temp++;
-                ind++;
-            }
-            ind=0;
-            while(ind<m){
-                arr2[ind]=arr[temp];
-                temp++;
-                ind++;
-            }
-        } 
+            sort(arr1,arr1+n);
+            sort(arr2,arr2+m);
+        }
 };
 
 //{ Driver Code Starts.
