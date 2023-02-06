@@ -12,20 +12,20 @@ class Solution
 	int minSwaps(vector<int>&nums)
 	{
 	    // Code here
-	    unordered_map<int,int>m;
+	    vector<pair<int,int>>v;
 	    for(int i=0;i<nums.size();i++){
-	        m[nums[i]]=i;
+	        v.push_back({nums[i],i});
 	    }
+	    sort(v.begin(),v.end());
 	    int res=0;
-	    vector<int>temp=nums;
-	    sort(temp.begin(),temp.end());
 	    for(int i=0;i<nums.size();i++){
-	        if(nums[i]!=temp[i]){
+	        if(i==v[i].second){
+	            continue;
+	        }
+	        else{
+	            swap(v[i],v[v[i].second]);
 	            res++;
-	            int t=nums[i];
-	            swap(nums[i],nums[m[temp[i]]]);
-	            m[t]=m[temp[i]];
-	            m[temp[i]]=i;
+	            i--;
 	        }
 	    }
 	    return res;
